@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Layout, Row, Col, Button, Icon } from "antd";
 import styled from "styled-components";
+import { Provider, Subscribe } from "unstated";
 
-import GuestLayout from "../layout/MainLayout";
+import MainLayout from "../layout/MainLayout";
 import ImagePlaceholder from "../../assets/img/image-placeholder.png";
+import OCRContainer from "./OCRContainer";
 
 const { Content } = Layout;
 
@@ -48,14 +50,14 @@ const StyledUploadButton = styled.div`
 const UploadButton = props => (
   <StyledUploadButton>
     <input type="file" multiple={false} {...props} />
-    <Button type="danger">
+    <Button type="danger" disabled={props.disabled}>
       <Icon type="camera" /> Camera
     </Button>
   </StyledUploadButton>
 );
 
 class UploadImages extends Component {
-  state = { file: [], filePreview: null };
+  state = { file: null, filePreview: null };
 
   handleFileChange = e => {
     const file = e.target.files[0];
@@ -64,29 +66,46 @@ class UploadImages extends Component {
   };
 
   render() {
-    const { filePreview } = this.state;
+    const { file, filePreview } = this.state;
     return (
-      <GuestLayout>
-        <Content>
-          <StyledPage>
-            <Row className="image" type="flex" justify="center">
-              <img src={filePreview || ImagePlaceholder} alt="Placeholder" />
-            </Row>
+      <Provider>
+        <Subscribe to={[OCRContainer]}>
+          {OCR => (
+            <MainLayout>
+              <Content>
+                <StyledPage>
+                  <Row className="image" type="flex" justify="center">
+                    <img
+                      src={filePreview || ImagePlaceholder}
+                      alt="Placeholder"
+                    />
+                  </Row>
 
-            <Row className="buttons" type="flex" justify="center">
-              <Col type="flex" justify="center">
-                <UploadButton onChange={this.handleFileChange} />
-              </Col>
-              <Col type="flex" justify="center">
-                <Button type="primary">
-                  Next
-                  <Icon type="right" />
-                </Button>
-              </Col>
-            </Row>
-          </StyledPage>
-        </Content>
-      </GuestLayout>
+                  <Row className="buttons" type="flex" justify="center">
+                    <Col type="flex" justify="center">
+                      <UploadButton
+                        onChange={this.handleFileChange}
+                        disabled={OCR.state.loading}
+                      />
+                    </Col>
+                    <Col type="flex" justify="center">
+                      <Button
+                        type="primary"
+                        disabled={!file}
+                        loading={OCR.state.loading}
+                        onClick={() => OCR.getTextFromImage(file)}
+                      >
+                        Next
+                        <Icon type="right" />
+                      </Button>
+                    </Col>
+                  </Row>
+                </StyledPage>
+              </Content>
+            </MainLayout>
+          )}
+        </Subscribe>
+      </Provider>
     );
   }
 }
