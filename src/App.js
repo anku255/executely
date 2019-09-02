@@ -1,5 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
+import { Provider } from "unstated";
 import lightTheme from "./themes/lightTheme";
 import GlobalStyle from "./themes/GlobalStyle";
 import Routes from "./routes";
@@ -9,7 +10,9 @@ function App() {
     <ThemeProvider theme={lightTheme}>
       <>
         <GlobalStyle />
-        <Routes />
+        <Provider>
+          <Routes />
+        </Provider>
       </>
     </ThemeProvider>
   );
