@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import AceEditor from "react-ace";
 import styled from "styled-components";
 import "brace/mode/c_cpp";
+import "brace/mode/python";
+import "brace/mode/javascript";
 import "brace/theme/monokai";
 
 const StyledEditor = styled.div`
@@ -17,7 +20,7 @@ class MyEditor extends Component {
     return (
       <StyledEditor className="editor">
         <AceEditor
-          mode="c_cpp"
+          mode={this.props.syntaxCode}
           theme="monokai"
           name="editor"
           width="100%"
@@ -25,14 +28,13 @@ class MyEditor extends Component {
           onLoad={this.onLoad}
           onChange={this.props.onValueChange}
           value={this.props.code}
-          fontSize={14}
+          fontSize={this.props.fontSize}
           showPrintMargin={false}
           showGutter={true}
           highlightActiveLine={true}
           setOptions={{
             enableBasicAutocompletion: true,
             enableLiveAutocompletion: true,
-            enableSnippets: false,
             showLineNumbers: true,
             tabSize: 2
           }}
@@ -43,3 +45,14 @@ class MyEditor extends Component {
 }
 
 export default MyEditor;
+
+MyEditor.propTypes = {
+  syntaxCode: PropTypes.string.isRequired,
+  code: PropTypes.string,
+  fontSize: PropTypes.number,
+  onValueChange: PropTypes.func.isRequired
+};
+
+MyEditor.defaultProps = {
+  fontSize: 14
+};

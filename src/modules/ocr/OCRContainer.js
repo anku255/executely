@@ -11,6 +11,7 @@ class OCRContainer extends Container {
     code: "",
     lang_code: "",
     lang_ver: "",
+    lang_syntaxCode: "c_cpp", // used for syntax highlighting
     imageURL: null,
     loading: false,
     error: "",
@@ -21,10 +22,14 @@ class OCRContainer extends Container {
 
   setImageURL = imageURL => this.setState({ imageURL });
 
-  // Shape of val => "cpp 2"
+  // Shape of val => "cpp 2 c_cpp"
   setLanguage = val => {
-    const [code, version] = val.split(" ");
-    this.setState({ lang_ver: version, lang_code: code });
+    const [code, version, syntaxCode] = val.split(" ");
+    this.setState({
+      lang_ver: version,
+      lang_code: code,
+      lang_syntaxCode: syntaxCode
+    });
   };
 
   getTextFromImage = async file => {
