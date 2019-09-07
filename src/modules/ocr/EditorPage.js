@@ -4,7 +4,7 @@ import { Typography, Row, Button, Icon } from "antd";
 import { Subscribe } from "unstated";
 
 import MainLayout from "../layout/MainLayout";
-import Editor from "../../components/Editor";
+import Editor from "./components/Editor";
 import OCRContainer from "./OCRContainer";
 import ImagePlaceholder from "../../assets/img/image-placeholder.png";
 
