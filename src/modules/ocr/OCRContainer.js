@@ -7,11 +7,25 @@ import history from "../../routes/history";
 const { SERVER_URL } = constants;
 
 class OCRContainer extends Container {
-  state = { code: "", imageURL: null, loading: false, error: "", output: "" };
+  state = {
+    code: "",
+    lang_code: "",
+    lang_ver: "",
+    imageURL: null,
+    loading: false,
+    error: "",
+    output: ""
+  };
 
   setCode = code => this.setState({ code });
 
   setImageURL = imageURL => this.setState({ imageURL });
+
+  // Shape of val => "cpp 2"
+  setLanguage = val => {
+    const [code, version] = val.split(" ");
+    this.setState({ lang_ver: version, lang_code: code });
+  };
 
   getTextFromImage = async file => {
     try {
@@ -34,11 +48,18 @@ class OCRContainer extends Container {
 
   getOutputFromCode = async () => {
     try {
+      const { code, lang_code, lang_ver } = this.state;
+
+      // Validations
+      if (!lang_ver || !lang_code) {
+        return message.error("Please select a language", 1);
+      }
+
+      // Set Loading and reset errors
       this.setState({ loading: true, error: "" });
       const hideLoadingMsg = message.loading("Executing code...", 0);
 
-      const data = { code: this.state.code, lang_code: "nodejs", lang_ver: 2 };
-
+      const data = { code, lang_code, lang_ver };
       const res = await axios.post(`${SERVER_URL}/getOutput`, data);
 
       // hide loading Message
