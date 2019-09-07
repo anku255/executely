@@ -34,7 +34,7 @@ export default class MainLayout extends Component {
             <Header>
               <Link to="/">
                 <span style={{ color: "#fff" }}>
-                  <strong>OCR App</strong>
+                  <strong>Executely</strong>
                 </span>
               </Link>
               <Button type="primary" shape="circle" onClick={this.showDrawer}>
