@@ -10,12 +10,12 @@ export const languageList = [
   { label: "Python (3.6.5)", value: "python3 1 python" }
 ];
 
-export const languageList = [
-  { label: "C (GCC 8.1.0)", code: "c99 2" },
-  { label: "C++ (GCC 8.1.0)", code: "cpp 3" },
-  { label: "NodeJS (10.1.0)", code: "nodejs 2" },
-  { label: "Python (2.7.15)", code: "python2 1" },
-  { label: "Python (3.6.5)", code: "python3 1" }
+export const themeList = [
+  { label: "Monokai", value: "monokai" },
+  { label: "Github", value: "github" },
+  { label: "Solarized Dark", value: "solarized_dark" },
+  { label: "Dracula", value: "dracula" },
+  { label: "Cobalt", value: "cobalt" }
 ];
 
 export default constants;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Typography, Row, Button, Icon, Select } from "antd";
+import { Col, Row, Button, Icon, Select } from "antd";
 import { Subscribe } from "unstated";
 
 import MainLayout from "../layout/MainLayout";
@@ -8,7 +8,7 @@ import PageHeader from "../layout/PageHeader";
 import Editor from "./components/Editor";
 import OCRContainer from "./OCRContainer";
 import ImagePlaceholder from "../../assets/img/image-placeholder.png";
-import { languageList } from "../../config/constants";
+import { languageList, themeList } from "../../config/constants";
 
 const { Option } = Select;
 
@@ -47,6 +47,15 @@ const LanguageSelectList = props => (
     ))}
   </Select>
 );
+const ThemeSelectList = props => (
+  <Select defaultValue="cobalt" onChange={props.handleChange}>
+    {themeList.map(lang => (
+      <Option key={lang.value} value={lang.value}>
+        {lang.label}
+      </Option>
+    ))}
+  </Select>
+);
 
 class EditorPage extends Component {
   render() {
@@ -67,12 +76,18 @@ class EditorPage extends Component {
               </Row>
               <div className="editor-container">
                 <Row className="config">
-                  <LanguageSelectList handleChange={OCR.setLanguage} />
+                  <Col span={4}>
+                    <LanguageSelectList handleChange={OCR.setLanguage} />
+                  </Col>
+                  <Col span={4}>
+                    <ThemeSelectList handleChange={OCR.setTheme} />
+                  </Col>
                 </Row>
                 <Editor
                   code={OCR.state.code}
                   syntaxCode={OCR.state.lang_syntaxCode}
                   onValueChange={OCR.setCode}
+                  theme={OCR.state.editor_theme}
                 />
               </div>
               <Row className="buttons" type="flex" justify="center">

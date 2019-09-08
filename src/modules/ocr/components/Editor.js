@@ -6,6 +6,10 @@ import "brace/mode/c_cpp";
 import "brace/mode/python";
 import "brace/mode/javascript";
 import "brace/theme/monokai";
+import "brace/theme/github";
+import "brace/theme/solarized_dark";
+import "brace/theme/dracula";
+import "brace/theme/cobalt";
 
 const StyledEditor = styled.div`
   border: 1px solid grey;
@@ -21,7 +25,7 @@ class MyEditor extends Component {
       <StyledEditor className="editor">
         <AceEditor
           mode={this.props.syntaxCode}
-          theme="monokai"
+          theme={this.props.theme}
           name="editor"
           width="100%"
           height="300px"
@@ -50,7 +54,8 @@ MyEditor.propTypes = {
   syntaxCode: PropTypes.string.isRequired,
   code: PropTypes.string,
   fontSize: PropTypes.number,
-  onValueChange: PropTypes.func.isRequired
+  onValueChange: PropTypes.func.isRequired,
+  theme: PropTypes.string
 };
 
 MyEditor.defaultProps = {
