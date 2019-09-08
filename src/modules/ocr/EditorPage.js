@@ -4,16 +4,16 @@ import { Typography, Row, Button, Icon, Select } from "antd";
 import { Subscribe } from "unstated";
 
 import MainLayout from "../layout/MainLayout";
+import PageHeader from "../layout/PageHeader";
 import Editor from "./components/Editor";
 import OCRContainer from "./OCRContainer";
 import ImagePlaceholder from "../../assets/img/image-placeholder.png";
 import { languageList } from "../../config/constants";
 
-const { Title } = Typography;
 const { Option } = Select;
 
 const StyledPage = styled.div`
-  padding: 0.5rem;
+  padding-top: 1rem;
   min-height: 100vh;
 
   .image {
@@ -54,8 +54,11 @@ class EditorPage extends Component {
       <Subscribe to={[OCRContainer]}>
         {OCR => (
           <MainLayout>
+            <PageHeader
+              onBack={() => this.props.history.push("/")}
+              title="Editor Page"
+            />
             <StyledPage>
-              <Title level={2}>Editor Page</Title>
               <Row className="image" type="flex" justify="center">
                 <img
                   src={OCR.state.imageURL || ImagePlaceholder}
