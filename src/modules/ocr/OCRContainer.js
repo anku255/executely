@@ -6,6 +6,19 @@ import history from "../../routes/history";
 
 const { SERVER_URL } = constants;
 
+const showErrorMessage = error => {
+  // hide all the other messages
+  message.destroy();
+
+  const errorData = error.response && error.response.data;
+  const errorMsg =
+    errorData && errorData.message
+      ? errorData.message
+      : "Something went wrong.";
+
+  message.error(errorMsg, 2);
+};
+
 class OCRContainer extends Container {
   state = {
     code: "",
@@ -14,7 +27,6 @@ class OCRContainer extends Container {
     lang_syntaxCode: "c_cpp", // used for syntax highlighting
     imageURL: null,
     loading: false,
-    error: "",
     output: ""
   };
 
@@ -34,20 +46,19 @@ class OCRContainer extends Container {
 
   getTextFromImage = async file => {
     try {
-      this.setState({ loading: true, error: "" });
+      this.setState({ loading: true });
+      const hideLoadingMsg = message.loading("Reading text...", 0);
+
       const formData = new FormData();
       formData.append("file", file);
       const res = await axios.post(`${SERVER_URL}/getText`, formData);
       const { text, imageUrl } = res.data;
       this.setState({ code: text, imageURL: imageUrl, loading: false });
-
+      hideLoadingMsg();
       history.push("/editor");
     } catch (error) {
-      if (error.response && error.response.data) {
-        this.setState({ loading: false, error: error.response.data });
-      } else {
-        this.setState({ loading: false, error: "Something went wrong." });
-      }
+      this.setState({ loading: false });
+      showErrorMessage(error);
     }
   };
 
@@ -80,17 +91,8 @@ class OCRContainer extends Container {
         message.success(output, 10);
       }
     } catch (error) {
-      // hide all the messages
-      message.destroy();
       this.setState({ loading: false });
-
-      const errorData = error.response.data;
-      const errorMsg =
-        errorData && errorData.message
-          ? errorData.message
-          : "Something went wrong.";
-
-      message.error(errorMsg, 2);
+      showErrorMessage(error);
     }
   };
 }
