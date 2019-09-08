@@ -26,6 +26,7 @@ class OCRContainer extends Container {
     lang_ver: "",
     lang_syntaxCode: "c_cpp", // used for syntax highlighting
     editor_theme: "cobalt",
+    editor_fontSize: 14,
     imageURL: null,
     loading: false,
     output: ""
@@ -46,6 +47,8 @@ class OCRContainer extends Container {
   };
 
   setTheme = val => this.setState({ editor_theme: val });
+
+  setFontSize = val => this.setState({ editor_fontSize: parseInt(val) });
 
   getTextFromImage = async file => {
     try {

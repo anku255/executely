@@ -8,7 +8,7 @@ import PageHeader from "../layout/PageHeader";
 import Editor from "./components/Editor";
 import OCRContainer from "./OCRContainer";
 import ImagePlaceholder from "../../assets/img/image-placeholder.png";
-import { languageList, themeList } from "../../config/constants";
+import { languageList, themeList, fontSizeList } from "../../config/constants";
 
 const { Option } = Select;
 
@@ -29,7 +29,14 @@ const StyledPage = styled.div`
     max-width: 80%;
 
     .config {
-      margin-bottom: 0.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      background: #fff;
+      padding: 1.5rem 2rem;
+
+      .ant-select:not(:last-child) {
+        margin-right: 0.5rem;
+      }
     }
   }
 
@@ -47,11 +54,22 @@ const LanguageSelectList = props => (
     ))}
   </Select>
 );
+
 const ThemeSelectList = props => (
-  <Select defaultValue="cobalt" onChange={props.handleChange}>
-    {themeList.map(lang => (
-      <Option key={lang.value} value={lang.value}>
-        {lang.label}
+  <Select defaultValue="Select Theme" onChange={props.handleChange}>
+    {themeList.map(theme => (
+      <Option key={theme.value} value={theme.value}>
+        {theme.label}
+      </Option>
+    ))}
+  </Select>
+);
+
+const FontSizeSelectList = props => (
+  <Select defaultValue="Change Font Size" onChange={props.handleChange}>
+    {fontSizeList.map(size => (
+      <Option key={size.value} value={size.value}>
+        {size.label}
       </Option>
     ))}
   </Select>
@@ -76,18 +94,16 @@ class EditorPage extends Component {
               </Row>
               <div className="editor-container">
                 <Row className="config">
-                  <Col span={4}>
-                    <LanguageSelectList handleChange={OCR.setLanguage} />
-                  </Col>
-                  <Col span={4}>
-                    <ThemeSelectList handleChange={OCR.setTheme} />
-                  </Col>
+                  <LanguageSelectList handleChange={OCR.setLanguage} />
+                  <ThemeSelectList handleChange={OCR.setTheme} />
+                  <FontSizeSelectList handleChange={OCR.setFontSize} />
                 </Row>
                 <Editor
                   code={OCR.state.code}
                   syntaxCode={OCR.state.lang_syntaxCode}
                   onValueChange={OCR.setCode}
                   theme={OCR.state.editor_theme}
+                  fontSize={OCR.state.editor_fontSize}
                 />
               </div>
               <Row className="buttons" type="flex" justify="center">

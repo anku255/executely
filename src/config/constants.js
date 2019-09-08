@@ -18,4 +18,13 @@ export const themeList = [
   { label: "Cobalt", value: "cobalt" }
 ];
 
+export const fontSizeList = [
+  { label: "12", value: "12" },
+  { label: "14", value: "14" },
+  { label: "16", value: "16" },
+  { label: "18", value: "18" },
+  { label: "20", value: "20" },
+  { label: "18", value: "18" }
+];
+
 export default constants;
