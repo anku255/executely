@@ -1,5 +1,11 @@
+function getServerURL() {
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === "development")
+    return "http://localhost:5000/api";
+  return "https://executely.herokuapp.com/api";
+}
+
 const constants = {
-  SERVER_URL: "http://localhost:5000/api"
+  SERVER_URL: getServerURL()
 };
 
 export const languageList = [
