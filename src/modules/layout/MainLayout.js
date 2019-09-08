@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Affix, BackTop, Button, Drawer, Icon, Layout } from "antd";
+import { Affix, BackTop, Layout } from "antd";
 
-const { Header } = Layout;
+import Header from "./Header";
 
 export default class MainLayout extends Component {
   state = {
@@ -31,27 +30,11 @@ export default class MainLayout extends Component {
             <BackTop />
           </div>
           <Affix offsetTop={0}>
-            <Header>
-              <Link to="/">
-                <span style={{ color: "#fff" }}>
-                  <strong>Executely</strong>
-                </span>
-              </Link>
-              <Button type="primary" shape="circle" onClick={this.showDrawer}>
-                <Icon type="bars" theme="outlined" />
-              </Button>
-              <Drawer
-                title="Menu"
-                placement="right"
-                closable={false}
-                onClose={this.onClose}
-                visible={visible}
-              >
-                <p>
-                  <Link to="/">Home</Link>
-                </p>
-              </Drawer>
-            </Header>
+            <Header
+              visible={visible}
+              showDrawer={this.showDrawer}
+              onClose={this.onClose}
+            />
           </Affix>
           {children}
         </Layout>
