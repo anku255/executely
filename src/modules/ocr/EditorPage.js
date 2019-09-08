@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Col, Row, Button, Icon, Select } from "antd";
+import { Row, Button, Icon, Select } from "antd";
 import { Subscribe } from "unstated";
 
 import MainLayout from "../layout/MainLayout";

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Button, Drawer, Icon, Layout, Menu } from "antd";
+import { Button, Drawer, Icon, Layout } from "antd";
 import ExecutelyLogo from "../../assets/img/logo192.png";
 
 const { Header } = Layout;
