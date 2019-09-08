@@ -15,6 +15,10 @@ const StyledHeader = styled(Header)`
     background: transparent;
     border: none;
     font-size: 2rem;
+
+    &:hover {
+      transform: scale(1.3);
+    }
   }
 
   .logo {
@@ -40,7 +44,7 @@ export default function MyHeader(props) {
   return (
     <StyledHeader>
       <Button type="primary" className="drawer-btn" onClick={props.showDrawer}>
-        <Icon type="bars" theme="outlined" />
+        <Icon type="menu-unfold" theme="outlined" />
       </Button>
       <Drawer
         title="Menu"
