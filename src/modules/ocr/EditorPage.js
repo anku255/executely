@@ -46,7 +46,11 @@ const StyledPage = styled.div`
 `;
 
 const LanguageSelectList = props => (
-  <Select defaultValue="Select Language" onChange={props.handleChange}>
+  <Select
+    value={props.value}
+    onChange={props.handleChange}
+    loading={props.isDetectingLanguage}
+  >
     {languageList.map(lang => (
       <Option key={lang.value} value={lang.value}>
         {lang.label}
@@ -94,7 +98,11 @@ class EditorPage extends Component {
               </Row>
               <div className="editor-container">
                 <Row className="config">
-                  <LanguageSelectList handleChange={OCR.setLanguage} />
+                  <LanguageSelectList
+                    handleChange={OCR.setLanguage}
+                    value={OCR.state.languageSelectValue}
+                    isDetectingLanguage={OCR.state.isDetectingLanguage}
+                  />
                   <ThemeSelectList handleChange={OCR.setTheme} />
                   <FontSizeSelectList handleChange={OCR.setFontSize} />
                 </Row>

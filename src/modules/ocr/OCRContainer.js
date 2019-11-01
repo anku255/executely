@@ -4,7 +4,7 @@ import axios from "axios";
 import constants from "../../config/constants";
 import history from "../../routes/history";
 
-const { SERVER_URL } = constants;
+const { SERVER_URL, SERVER_URL_PYTHON } = constants;
 
 const showErrorMessage = error => {
   // hide all the other messages
@@ -29,7 +29,9 @@ class OCRContainer extends Container {
     editor_fontSize: 14,
     imageURL: null,
     loading: false,
-    output: ""
+    output: "",
+    isDetectingLanguage: false,
+    languageSelectValue: "Select Language"
   };
 
   setCode = code => this.setState({ code });
@@ -42,7 +44,8 @@ class OCRContainer extends Container {
     this.setState({
       lang_ver: version,
       lang_code: code,
-      lang_syntaxCode: syntaxCode
+      lang_syntaxCode: syntaxCode,
+      languageSelectValue: val
     });
   };
 
@@ -61,6 +64,7 @@ class OCRContainer extends Container {
       const { text, imageUrl } = res.data;
       this.setState({ code: text, imageURL: imageUrl, loading: false });
       hideLoadingMsg();
+      this.detectLanguageFromCode(text);
       history.push("/editor");
     } catch (error) {
       this.setState({ loading: false });
@@ -99,6 +103,25 @@ class OCRContainer extends Container {
     } catch (error) {
       this.setState({ loading: false });
       showErrorMessage(error);
+    }
+  };
+
+  detectLanguageFromCode = async code => {
+    try {
+      if (!code) return;
+
+      // Set Loading and reset errors
+      this.setState({ isDetectingLanguage: true });
+
+      const data = { code };
+      const res = await axios.post(`${SERVER_URL_PYTHON}/detect`, data);
+      const { language } = res.data;
+
+      this.setState({ isDetectingLanguage: false });
+      this.setLanguage(language);
+    } catch (error) {
+      console.error("error", error);
+      this.setState({ isDetectingLanguage: false });
     }
   };
 }

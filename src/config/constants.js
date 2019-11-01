@@ -5,7 +5,8 @@ function getServerURL() {
 }
 
 const constants = {
-  SERVER_URL: getServerURL()
+  SERVER_URL: getServerURL(),
+  SERVER_URL_PYTHON: "https://lang-detection.herokuapp.com"
 };
 
 export const languageList = [
