@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { Row, Button, Icon, Select } from "antd";
 import { Subscribe } from "unstated";
+import { Redirect } from "react-router-dom";
 
 import MainLayout from "../layout/MainLayout";
 import PageHeader from "../layout/PageHeader";
@@ -83,51 +84,55 @@ class EditorPage extends Component {
   render() {
     return (
       <Subscribe to={[OCRContainer]}>
-        {OCR => (
-          <MainLayout>
-            <PageHeader
-              onBack={() => this.props.history.push("/")}
-              title="Editor Page"
-            />
-            <StyledPage>
-              <Row className="image" type="flex" justify="center">
-                <img
-                  src={OCR.state.imageURL || ImagePlaceholder}
-                  alt="Placeholder"
-                />
-              </Row>
-              <div className="editor-container">
-                <Row className="config">
-                  <LanguageSelectList
-                    handleChange={OCR.setLanguage}
-                    value={OCR.state.languageSelectValue}
-                    isDetectingLanguage={OCR.state.isDetectingLanguage}
+        {OCR => {
+          if (!OCR.state.imageURL) return <Redirect to="/" />;
+
+          return (
+            <MainLayout>
+              <PageHeader
+                onBack={() => this.props.history.push("/")}
+                title="Editor Page"
+              />
+              <StyledPage>
+                <Row className="image" type="flex" justify="center">
+                  <img
+                    src={OCR.state.imageURL || ImagePlaceholder}
+                    alt="Placeholder"
                   />
-                  <ThemeSelectList handleChange={OCR.setTheme} />
-                  <FontSizeSelectList handleChange={OCR.setFontSize} />
                 </Row>
-                <Editor
-                  code={OCR.state.code}
-                  syntaxCode={OCR.state.lang_syntaxCode}
-                  onValueChange={OCR.setCode}
-                  theme={OCR.state.editor_theme}
-                  fontSize={OCR.state.editor_fontSize}
-                />
-              </div>
-              <Row className="buttons" type="flex" justify="center">
-                <Button
-                  type="primary"
-                  disabled={!OCR.state.code}
-                  loading={OCR.state.loading}
-                  onClick={OCR.getOutputFromCode}
-                >
-                  Get Output
-                  <Icon type="right" />
-                </Button>
-              </Row>
-            </StyledPage>
-          </MainLayout>
-        )}
+                <div className="editor-container">
+                  <Row className="config">
+                    <LanguageSelectList
+                      handleChange={OCR.setLanguage}
+                      value={OCR.state.languageSelectValue}
+                      isDetectingLanguage={OCR.state.isDetectingLanguage}
+                    />
+                    <ThemeSelectList handleChange={OCR.setTheme} />
+                    <FontSizeSelectList handleChange={OCR.setFontSize} />
+                  </Row>
+                  <Editor
+                    code={OCR.state.code}
+                    syntaxCode={OCR.state.lang_syntaxCode}
+                    onValueChange={OCR.setCode}
+                    theme={OCR.state.editor_theme}
+                    fontSize={OCR.state.editor_fontSize}
+                  />
+                </div>
+                <Row className="buttons" type="flex" justify="center">
+                  <Button
+                    type="primary"
+                    disabled={!OCR.state.code}
+                    loading={OCR.state.loading}
+                    onClick={OCR.getOutputFromCode}
+                  >
+                    Get Output
+                    <Icon type="right" />
+                  </Button>
+                </Row>
+              </StyledPage>
+            </MainLayout>
+          );
+        }}
       </Subscribe>
     );
   }

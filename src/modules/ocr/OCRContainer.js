@@ -62,10 +62,11 @@ class OCRContainer extends Container {
       formData.append("file", file);
       const res = await axios.post(`${SERVER_URL}/getText`, formData);
       const { text, imageUrl } = res.data;
-      this.setState({ code: text, imageURL: imageUrl, loading: false });
-      hideLoadingMsg();
+      this.setState({ code: text, imageURL: imageUrl, loading: false }, () => {
+        hideLoadingMsg();
+        history.push("/editor");
+      });
       this.detectLanguageFromCode(text);
-      history.push("/editor");
     } catch (error) {
       this.setState({ loading: false });
       showErrorMessage(error);
