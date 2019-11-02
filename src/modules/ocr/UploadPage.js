@@ -38,7 +38,7 @@ const StyledPage = styled.div`
       justify-content: center;
 
       button {
-        width: auto;
+        /* width: auto; */
       }
     }
   }
@@ -104,12 +104,14 @@ class UploadImages extends Component {
                     <Row className="next-btn">
                       <Button
                         type="primary"
-                        shape="circle"
-                        icon="right"
                         disabled={!file}
                         loading={OCR.state.loading}
                         onClick={() => OCR.getTextFromImage(file)}
-                      />
+                        block
+                      >
+                        <Icon type="file-search" />
+                        Read Text
+                      </Button>
                     </Row>
                   </Card>
                 </Row>
