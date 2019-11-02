@@ -11,9 +11,7 @@ import "brace/theme/solarized_dark";
 import "brace/theme/dracula";
 import "brace/theme/cobalt";
 
-const StyledEditor = styled.div`
-  border: 1px solid grey;
-`;
+const StyledEditor = styled.div``;
 
 class MyEditor extends Component {
   onLoad = editor => {

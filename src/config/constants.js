@@ -34,4 +34,13 @@ export const fontSizeList = [
   { label: "18", value: "18" }
 ];
 
+export const breakPoints = {
+  xs: "480px",
+  sm: "576px",
+  md: "768px",
+  lg: "992px",
+  xl: "1200px",
+  xxl: "1600px"
+};
+
 export default constants;

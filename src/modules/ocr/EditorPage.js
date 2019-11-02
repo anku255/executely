@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Row, Button, Icon, Select } from "antd";
+import { Row, Col, Button, Icon, Select } from "antd";
 import { Subscribe } from "unstated";
 import { Redirect } from "react-router-dom";
 
@@ -9,7 +9,12 @@ import PageHeader from "../layout/PageHeader";
 import Editor from "./components/Editor";
 import OCRContainer from "./OCRContainer";
 import ImagePlaceholder from "../../assets/img/image-placeholder.png";
-import { languageList, themeList, fontSizeList } from "../../config/constants";
+import {
+  languageList,
+  themeList,
+  fontSizeList,
+  breakPoints
+} from "../../config/constants";
 
 const { Option } = Select;
 
@@ -17,32 +22,49 @@ const StyledPage = styled.div`
   padding-top: 1rem;
   min-height: 100vh;
 
+  .ant-row-flex {
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+  }
+
   .image {
-    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    background: #fff;
+    padding: 1rem;
 
     img {
-      max-width: 80%;
+      height: 100%;
     }
   }
 
   .editor-container {
-    margin: 0 auto;
-    max-width: 80%;
-
-    .config {
+    .editor__toolbar-top {
+      box-shadow: 0 6px 16px 0 var(--shadow-light);
       display: flex;
       flex-wrap: wrap;
       background: #fff;
-      padding: 1.5rem 2rem;
+      padding: 1rem 1.5rem 1rem 0;
 
+      .ant-select {
+        margin-bottom: 0.8rem;
+      }
       .ant-select:not(:last-child) {
-        margin-right: 0.5rem;
+        margin-right: 0.8rem;
       }
     }
-  }
+    .editor__toolbar-bottom {
+      box-shadow: 0 6px 16px 0 var(--shadow-light);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      background: #fff;
+      padding: 1rem 0;
+    }
 
-  .buttons {
-    margin-top: 2rem;
+    @media (max-width: ${breakPoints.lg}) {
+      margin-top: 1rem;
+    }
   }
 `;
 
@@ -94,40 +116,46 @@ class EditorPage extends Component {
                 title="Editor Page"
               />
               <StyledPage>
-                <Row className="image" type="flex" justify="center">
-                  <img
-                    src={OCR.state.imageURL || ImagePlaceholder}
-                    alt="Placeholder"
-                  />
-                </Row>
-                <div className="editor-container">
-                  <Row className="config">
-                    <LanguageSelectList
-                      handleChange={OCR.setLanguage}
-                      value={OCR.state.languageSelectValue}
-                      isDetectingLanguage={OCR.state.isDetectingLanguage}
+                <Row type="flex" gutter={[10, 10]}>
+                  <Col xs={24} lg={10} className="image">
+                    <img
+                      src={OCR.state.imageURL || ImagePlaceholder}
+                      alt="Placeholder"
                     />
-                    <ThemeSelectList handleChange={OCR.setTheme} />
-                    <FontSizeSelectList handleChange={OCR.setFontSize} />
-                  </Row>
-                  <Editor
-                    code={OCR.state.code}
-                    syntaxCode={OCR.state.lang_syntaxCode}
-                    onValueChange={OCR.setCode}
-                    theme={OCR.state.editor_theme}
-                    fontSize={OCR.state.editor_fontSize}
-                  />
-                </div>
-                <Row className="buttons" type="flex" justify="center">
-                  <Button
-                    type="primary"
-                    disabled={!OCR.state.code}
-                    loading={OCR.state.loading}
-                    onClick={OCR.getOutputFromCode}
-                  >
-                    Get Output
-                    <Icon type="right" />
-                  </Button>
+                  </Col>
+                  <Col xs={24} lg={14}>
+                    <div className="editor-container">
+                      <Row className="editor__toolbar-top">
+                        <LanguageSelectList
+                          handleChange={OCR.setLanguage}
+                          value={OCR.state.languageSelectValue}
+                          isDetectingLanguage={OCR.state.isDetectingLanguage}
+                        />
+                        <ThemeSelectList handleChange={OCR.setTheme} />
+                        <FontSizeSelectList handleChange={OCR.setFontSize} />
+                      </Row>
+                      <Editor
+                        code={OCR.state.code}
+                        syntaxCode={OCR.state.lang_syntaxCode}
+                        onValueChange={OCR.setCode}
+                        theme={OCR.state.editor_theme}
+                        fontSize={OCR.state.editor_fontSize}
+                      />
+                      <Row className="editor__toolbar-bottom">
+                        <Button
+                          type="primary"
+                          size="large"
+                          disabled={!OCR.state.code}
+                          loading={OCR.state.loading}
+                          onClick={OCR.getOutputFromCode}
+                          block
+                        >
+                          Run Code
+                          <Icon type="play-square" />
+                        </Button>
+                      </Row>
+                    </div>
+                  </Col>
                 </Row>
               </StyledPage>
             </MainLayout>
