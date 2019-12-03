@@ -34,6 +34,7 @@ const StyledPage = styled.div`
     padding: 1rem;
 
     img {
+      width: 100%;
       height: 100%;
     }
   }
