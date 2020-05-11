@@ -1,5 +1,5 @@
 {
-  "name": "express-basic-boilerplate",
+  "name": "executely",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -20,9 +20,9 @@
   "author": "Ankit Tiwari",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/anku255/express-basic-boilerplate/issues"
+    "url": "https://github.com/anku255/executely/issues"
   },
-  "homepage": "https://github.com/anku255/express-basic-boilerplate#readme",
+  "homepage": "https://github.com/anku255/executely#readme",
   "dependencies": {
     "@google-cloud/vision": "^1.2.0",
     "axios": "^0.19.0",
