@@ -19,7 +19,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server-install": "npm install --prefix server",
+    "client": "npm start",
+    "server": "npm start --prefix server",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0"
   }
 }

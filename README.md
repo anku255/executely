@@ -1,68 +1,53 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Executely
 
-## Available Scripts
+### What is this?
 
-In the project directory, you can run:
+Executely is a webapp which can be used to execute handwritten or printed code in your browser. You just need to upload an image containing the source code and you can check the output of the code within a few seconds. 
 
-### `npm start`
+### Why does this project exist?
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In India, majority of universities still ask their students to write code on paper and it is extremely difficult to check the correctness or output of such code. With executely, professors can just take a snapshot of the code and get the output in a few seconds.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Where can I see this?
 
-### `npm test`
+You can visit this website by clicking [here](https://executely.netlify.app/).
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### How does this work?
 
-### `npm run build`
+Executely uses Google's Cloud Vision OCR API to parse text from the image. For execution of the code, Executely uses [Jdoodle's API](https://www.jdoodle.com/).
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### What languages are currently supported?
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Executely supports C, C++, JavaScript and Python.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Show me some screenshots.
 
-### `npm run eject`
+![Step 1](https://i.imgur.com/vaWupn6.png)
+![Step 2](https://i.imgur.com/thnV2Na.png)
+![Step 3](https://i.imgur.com/SK2zsvx.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### How to run this locally?
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Clone this repository.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Setting up Environment Variables
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* Create a file called `variables.env` in the `server` directory. Provide the values for following keys -
 
-## Learn More
+```
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_FOLDER=
+GOOGLE_CLOUD_JSON=
+JDOODLE_CLIENT_ID=
+JDOODLE_CLIENT_SECRET=
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Installing dependencies
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* `npm install`
+* `npm run server-install`
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+#### Running both client and server
+* `npm run dev`
