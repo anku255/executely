@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Layout, Row, Card, Button, Icon } from "antd";
+import { Layout, Row, Card, Button, Icon, Alert } from "antd";
 import styled from "styled-components";
 import { Subscribe } from "unstated";
 
@@ -79,7 +79,12 @@ class UploadImages extends Component {
         {OCR => (
           <MainLayout>
             <Content>
-               <Steps currentStep={0} />
+              <Steps currentStep={0} />
+              <Alert
+                message="You can upload images of both handwritten or printed code. Currently, we support C, C++, JavaScript and Python."
+                type="info"
+                closable
+              />
               <StyledPage>
                 <Row className="image-card">
                   <Card
