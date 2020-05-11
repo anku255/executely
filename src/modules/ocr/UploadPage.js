@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Subscribe } from "unstated";
 
 import MainLayout from "../layout/MainLayout";
-import PageHeader from "../layout/PageHeader";
+import Steps from "./components/Steps";
 import ImagePlaceholder from "../../assets/img/image-placeholder.png";
 import OCRContainer from "./OCRContainer";
 
@@ -36,10 +36,6 @@ const StyledPage = styled.div`
       width: 100%;
       display: flex;
       justify-content: center;
-
-      button {
-        /* width: auto; */
-      }
     }
   }
 
@@ -83,10 +79,7 @@ class UploadImages extends Component {
         {OCR => (
           <MainLayout>
             <Content>
-              <PageHeader
-                onBack={() => this.props.history.push("/")}
-                title="Upload Image"
-              />
+               <Steps currentStep={0} />
               <StyledPage>
                 <Row className="image-card">
                   <Card

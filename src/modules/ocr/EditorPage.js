@@ -5,7 +5,7 @@ import { Subscribe } from "unstated";
 import { Redirect } from "react-router-dom";
 
 import MainLayout from "../layout/MainLayout";
-import PageHeader from "../layout/PageHeader";
+import Steps from './components/Steps';
 import Editor from "./components/Editor";
 import OCRContainer from "./OCRContainer";
 import ImagePlaceholder from "../../assets/img/image-placeholder.png";
@@ -112,10 +112,7 @@ class EditorPage extends Component {
 
           return (
             <MainLayout>
-              <PageHeader
-                onBack={() => this.props.history.push("/")}
-                title="Editor Page"
-              />
+              <Steps currentStep={OCR.state.output ? 2 : 1} />
               <StyledPage>
                 <Row type="flex" gutter={[10, 10]}>
                   <Col xs={24} lg={10} className="image">
