@@ -1,0 +1,46 @@
+{
+  "name": "express-basic-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js",
+    "lint": "eslint ./src --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anku255/express-basic-boilerplate.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "ExpressJS",
+    "MongoDB"
+  ],
+  "author": "Ankit Tiwari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anku255/express-basic-boilerplate/issues"
+  },
+  "homepage": "https://github.com/anku255/express-basic-boilerplate#readme",
+  "dependencies": {
+    "@google-cloud/vision": "^1.2.0",
+    "axios": "^0.19.0",
+    "body-parser": "^1.18.3",
+    "cloudinary": "^1.14.0",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.11",
+    "multer": "^1.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "nodemon": "^1.18.10",
+    "prettier": "^1.16.4"
+  }
+}
