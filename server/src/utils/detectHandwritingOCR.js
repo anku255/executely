@@ -25,4 +25,4 @@ function detectHandwritingOCR(fileBuffer) {
   });
 }
 
-module.exoprts = detectHandwritingOCR;
+module.exports = detectHandwritingOCR;
