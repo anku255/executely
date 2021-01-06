@@ -25,7 +25,7 @@
   "homepage": "https://github.com/anku255/executely#readme",
   "dependencies": {
     "@google-cloud/vision": "^1.2.0",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.18.3",
     "cloudinary": "^1.14.0",
     "cors": "^2.8.5",
